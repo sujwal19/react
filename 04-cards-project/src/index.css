@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+     font-family: "Inter", sans-serif;
+}
+ 
+html , body{
+    height: 100%;
+    width: 100%;
+}
+
+.parent{
+  min-height: 100vh;
+  width: 100%;
+  background-color: #111;
+  padding: 30px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.card{
+  height: 350px;
+  width: 320px;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.top{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.topNav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top img{
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  background-color: #fff;
+  padding: 3px;
+  border: 1px solid #c1bebee9;
+  object-fit: cover;
+}
+
+.top button{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  padding: 4px 6px;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 1px solid #5757574f;
+  color: #57575799;
+  background-color: transparent;
+}
+
+.center{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.center h4{
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.center h4 span{
+  font-size: 12px;
+  font-weight: 400;
+  color: #1111117e;
+}
+
+.center h3{
+  font-size: 22px;
+}
+
+.center .tag{
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  padding-top: 15px;
+}
+
+.tag h4{
+  padding: 5px 8px;
+  background-color: #11111135;
+   color: #111;
+  font-size: 12.5px;
+  border-radius: 5px;
+}
+
+.bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #11111137;
+  padding-top: 15px;
+}
+
+.bottom h3{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.bottom p{
+  font-size: 12px;
+  color: #1111118d;
+  margin-top: 5px;
+}
+
+.bottom button{
+  padding: 9px 20px;
+  background-color: #111;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  column-width: 600;
+  text-align: center;
+}
