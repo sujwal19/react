@@ -1,0 +1,27 @@
+.header{
+    background-color: cadetblue;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header button{
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+.header h3{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.header h3:hover{
+    color: #fff;
+}
