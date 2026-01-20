@@ -10,15 +10,37 @@ const App = () => {
 
   const [fruits, setFruits] = useState(["Apple", "Banana", "Mango"]);
 
+  const [color, setColor] = useState("blue");
+
+  function randomColor() {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  const handleClick = () => {
+    setColor(randomColor());
+  };
+
   return (
     <div>
       {/* <Counter /> */}
       {/* <TextDisplay /> */}
-      <ul>
+      {/* <ul>
         {fruits.map((fruit, idx) => {
           return <li key={idx}>{fruit}</li>;
         })}
-      </ul>
+      </ul> */}
+      <div
+        className="m-20 flex h-100 w-100 items-end justify-center text-xl"
+        style={{ backgroundColor: color }}
+        onClick={handleClick}
+      >
+        {color}
+      </div>
     </div>
   );
 };
