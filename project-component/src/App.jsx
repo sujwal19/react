@@ -1,47 +1,89 @@
 import { useState } from "react";
+import { Search } from "lucide-react";
 
-function App() {
-  const [quote, setQuote] = useState(
-    `"The only way of finding the limits of the possible is by going beyond them into the impossible."`,
-  );
-  const [author, setAuthor] = useState("Arthur C. Clarke");
-  const MAX_LENGTH = 180;
-  const MAX_RETRIES = 6;
+const App = () => {
+  const [searchCity, setSearchCity] = useState("");
+  const [city, setCity] = useState("Kathmandu");
+  const [icon, setIcon] = useState("02d");
+  const [temp, setTemp] = useState(17.12);
+  const [humidity, setHumidity] = useState("39");
+  const [windSpeed, setWindSpeed] = useState("4.12");
+  const [error, setError] = useState("");
 
-  const getQuote = async () => {
-    let attemps = 0;
+  const getWeather = async () => {
+    if (!searchCity) {
+      setError("Please Enter a City Name");
+      return;
+    }
 
-    while (attemps < MAX_RETRIES) {
-      const response = await fetch("https://thequoteshub.com/api/");
-      const data = await response.json();
+    setError("");
 
-      if (data.text && data.text.length <= MAX_LENGTH) {
-        setQuote(data.text);
-        setAuthor(data.author || "Unknown");
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=523ef653d1c2f2aedf0e426a2c29312c&units=metric`,
+      );
+
+      if (!response.ok) {
+        setError("City Not Found. Please try again");
         return;
       }
-      attemps++;
+      const data = await response.json();
+
+      console.log(data);
+      setCity(data.name);
+      setTemp(data.main.temp);
+      setHumidity(data.main.humidity);
+      setWindSpeed(data.wind.speed);
+      setIcon(data.weather[0].icon);
+      setSearchCity("");
+    } catch (error) {
+      setError("Failed to fetch connection.");
     }
-    setQuote(
-      `"The only way of finding the limits of the possible is by going beyond them into the impossible."`,
-    );
-    setAuthor("Arthur C. Clarke");
   };
 
   return (
-    <div className="flex h-screen items-center justify-center bg-yellow-400">
-      <main className="flex w-2/4 flex-col gap-10 bg-gray-100 p-10">
+    <div className="flex h-screen items-center justify-center bg-[#1E1061] text-white">
+      <main className="flex h-130 flex-col justify-between rounded-2xl border-2 border-gray-300 p-10">
         <div>
-          <h1 className="text-3xl font-medium">{quote}</h1>
-          <p className="text-md mt-3 text-center text-gray-700">{author}</p>
+          <input
+            type="text"
+            className="mr-4 rounded-full border-2 px-5 py-2 outline-none"
+            placeholder="Enter City Name"
+            value={searchCity}
+            onChange={(e) => setSearchCity(e.target.value)}
+          />
+          <button
+            onClick={getWeather}
+            className="rounded-full border-2 border-white px-3.5 py-3.5 text-white"
+          >
+            <Search size={17} strokeWidth={3} className="text-white" />
+          </button>
+          {error && <p className="text-red-400">{error}</p>}
         </div>
-
-        <button className="bg-yellow-400 px-5 py-2.5" onClick={getQuote}>
-          Change Quote
-        </button>
+        <div className="hero flex flex-col items-center gap-2">
+          {icon && (
+            <img
+              className="h-40"
+              src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
+              alt="weather icon"
+            />
+          )}
+          <h2 className="text-7xl font-semibold">{temp}'C</h2>
+          <h3 className="mt-1 mb-3 text-2xl">{city}</h3>
+        </div>
+        <div className="flex flex-row justify-between">
+          <div className="humidity">
+            <h3 className="text-xl font-medium">{humidity}%</h3>
+            <p className="text-sm text-gray-200">Humidity</p>
+          </div>
+          <div className="windspeed">
+            <h3 className="text-xl font-medium">{windSpeed}km/ h</h3>
+            <p className="text-sm text-gray-200">Wind Speed</p>
+          </div>
+        </div>
       </main>
     </div>
   );
-}
+};
 
 export default App;
