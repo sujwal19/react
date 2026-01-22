@@ -10,6 +10,8 @@ const App = () => {
   const [windSpeed, setWindSpeed] = useState("4.12");
   const [error, setError] = useState("");
 
+  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+
   const getWeather = async () => {
     if (!searchCity) {
       setError("Please Enter a City Name");
@@ -20,7 +22,7 @@ const App = () => {
 
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=523ef653d1c2f2aedf0e426a2c29312c&units=metric`,
+        `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}c&units=metric`,
       );
 
       if (!response.ok) {
