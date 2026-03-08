@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 export const useExpenses = () => {
   const [expenses, setExpenses] = useState(() => {
@@ -22,6 +23,12 @@ export const useExpenses = () => {
   useEffect(() => {
     localStorage.setItem("expenses", JSON.stringify(expenses));
   }, [expenses]);
+
+  async function getTransaction() {
+    try {
+      const res = await axios.get("/api/v1/transactions");
+    } catch (err) {}
+  }
 
   function addExpense(e) {
     e.preventDefault();
