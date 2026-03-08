@@ -20,7 +20,7 @@ app.use(cors());
 const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
-      ? "https://your-deployed-app.vercel.app" // Update this after deploying
+      ? "https://expense-tracker-mern-live.vercel.app/"
       : "http://localhost:5173",
   optionsSuccessStatus: 200,
 };
