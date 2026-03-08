@@ -38,7 +38,7 @@ const TransactionForm = ({
       </div>
 
       <button className="bg-purple-500 w-full px-6 mt-1 text-white py-2.5">
-        {isEditing ? "Update" : "Add transaction"}
+        {isEditing ? "Update Transaction" : "Add Transaction"}
       </button>
     </form>
   );

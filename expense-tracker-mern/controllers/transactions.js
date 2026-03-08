@@ -72,3 +72,24 @@ exports.deleteTransaction = async (req, res, next) => {
     });
   }
 };
+
+// @desc    Update transaction
+// @route   PUT /api/v1/transactions/:id
+// @access  Public
+exports.updateTransaction = async (req, res, next) => {
+  try {
+    const transaction = await Transaction.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true },
+    );
+
+    if (!transaction) {
+      return res.status(404).json({ success: false, error: "Not Found" });
+    }
+
+    return res.status(200).json({ success: true, data: transaction });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: "Server Error" });
+  }
+};

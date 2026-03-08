@@ -1,26 +1,32 @@
-import React from "react";
 import { SquarePen, Trash } from "lucide-react";
 
 const HistoryList = ({ expenses, onDelete, onEdit }) => {
+  if (expenses.length === 0) {
+    return (
+      <div className="text-center py-10 text-gray-500 italic">
+        No transactions found. Add one below!
+      </div>
+    );
+  }
   return (
     <div className="overflow-y-auto">
       <ol className="flex flex-col justify-between">
         {expenses.map((expense) => (
           <li
-            key={expense.id}
-            className={`flex justify-between bg-white group px-3 border-r-5 py-2.5 mb-3 ${
+            key={expense._id}
+            className={`flex justify-between bg-white group  px-3 border-r-5 py-2.5 mb-3 transition-all duration-200 hover:shadow-sm ${
               expense.amount > 0 ? "border-r-green-500" : "border-r-red-500"
             }`}
           >
             <div className="flex items-center gap-3">
-              <button onClick={() => onDelete(expense.id)}>
+              <button onClick={() => onDelete(expense._id)}>
                 <Trash
                   size={16}
                   strokeWidth={3}
-                  className="text-gray-300 hover:text-red-500"
+                  className="text-gray-300 hover:text-red-500 transition-all duration-200"
                 />
               </button>
-              <p className="capitalize">{expense.name}:</p>
+              <p className="capitalize">{expense.text}:</p>
               <button
                 onClick={() => onEdit(expense)}
                 className="opacity-0 group-hover:opacity-100"
@@ -28,7 +34,7 @@ const HistoryList = ({ expenses, onDelete, onEdit }) => {
                 <SquarePen
                   size={16}
                   strokeWidth={3}
-                  className="text-gray-300 hover:text-yellow-500"
+                  className="text-gray-300 hover:text-yellow-500 transition-all duration-200"
                 />
               </button>
             </div>

@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# Secrets
+.env
+config/config.env
+
+# Production Build
+dist/
+build/
+
+# OS Files
+.DS_Store

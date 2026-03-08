@@ -1,7 +1,8 @@
 export function convertToCSV(expenses, income, expense, balance) {
-  const header = "id,name,amount\n";
+  const header = "ID,Transaction,Amount\n";
+
   const rows = expenses
-    .map((exp) => `${exp.id},${exp.name},${exp.amount}`)
+    .map((exp) => `"${exp._id}","${exp.text}","${exp.amount}"`)
     .join("\n");
 
   const totals =
@@ -15,9 +16,13 @@ export function convertToCSV(expenses, income, expense, balance) {
 export function downloadCSV(csv, filename) {
   const blob = new Blob([csv], { type: "text/csv" });
   const url = URL.createObjectURL(blob);
+
   const a = document.createElement("a");
   a.href = url;
   a.download = filename;
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
+
   URL.revokeObjectURL(url);
 }
