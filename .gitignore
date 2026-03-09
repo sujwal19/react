@@ -7,3 +7,4 @@ node_modules/
 
 .env
 config.env
+expense-tracker-mern/config/config.env
